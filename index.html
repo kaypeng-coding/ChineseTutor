@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小星星國語家教 (Chinese Tutor)</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Nunito:wght@600;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="background-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <i class="fas fa-star text-yellow"></i>
+                <h1>Peter國語家教</h1>
+            </div>
+            <button id="btn-settings" class="icon-btn" title="設定">
+                <i class="fas fa-cog"></i>
+            </button>
+        </div>
+    </header>
+
+    <main id="app-container">
+        <!-- Dashboard View -->
+        <section id="view-dashboard" class="view active">
+            <div class="welcome-card glass-panel">
+                <h2>今天要練習什麼呢？</h2>
+                <p>請選擇你想複習的項目，我們一起變厲害！</p>
+
+                <div class="mode-cards">
+                    <button class="mode-card" data-mode="character">
+                        <div class="card-icon bg-blue">
+                            <i class="fas fa-pencil-alt"></i>
+                        </div>
+                        <h3>生字語詞練習</h3>
+                        <p>形近字、多音字、注音與「語詞」運用練習</p>
+                    </button>
+
+                    <button class="mode-card" data-mode="idiom">
+                        <div class="card-icon bg-green">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <h3>成語練習</h3>
+                        <p>從短文中學習成語的用法、意義與近反義詞</p>
+                    </button>
+
+                    <button class="mode-card" data-mode="rhetoric">
+                        <div class="card-icon bg-orange">
+                            <i class="fas fa-magic"></i>
+                        </div>
+                        <h3>修辭練習</h3>
+                        <p>練習譬喻、擬人、排比等各種修辭手法</p>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Setup Practice View -->
+        <section id="view-setup" class="view">
+            <div class="setup-card glass-panel">
+                <button class="back-btn"><i class="fas fa-arrow-left"></i> 返回</button>
+
+                <h2 id="setup-title">準備練習</h2>
+
+                <div class="form-group">
+                    <label>題數設定</label>
+                    <div class="count-selector">
+                        <input type="range" id="question-count" min="5" max="50" step="5" value="20">
+                        <span id="question-count-display">20 題</span>
+                    </div>
+                </div>
+
+
+
+                <div class="form-group">
+                    <label>提供練習範圍</label>
+                    <p class="helper-text">你可以貼上生字列表或課文內容，或是上傳課本的照片。</p>
+
+                    <div class="tabs">
+                        <button class="tab-btn active" data-tab="builtin">內建課本</button>
+                        <button class="tab-btn" data-tab="text">文字輸入</button>
+                        <button class="tab-btn" data-tab="image">圖片上傳</button>
+                    </div>
+
+                    <div class="tab-content active" id="tab-builtin">
+                        <div id="builtin-list" class="builtin-list">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="tab-text">
+                        <textarea id="scope-text" placeholder="請在此貼上課文或你想練習的詞語..."></textarea>
+                    </div>
+
+                    <div class="tab-content" id="tab-image">
+                        <div class="file-upload-wrapper" id="drop-zone">
+                            <input type="file" id="scope-image" accept="image/*">
+                            <div class="upload-placeholder">
+                                <i class="fas fa-cloud-upload-alt container-icon"></i>
+                                <span>點擊或拖曳圖片至此處</span>
+                            </div>
+                            <img id="image-preview" src="" alt="預覽圖片" style="display: none;">
+                        </div>
+                    </div>
+                </div>
+
+                <button id="btn-start-practice" class="primary-btn pulse-animation">
+                    <i class="fas fa-magic"></i> 開始出題
+                </button>
+
+                <div id="loading-indicator" class="loading-state" style="display: none;">
+                    <div class="spinner"></div>
+                    <p>AI 正在幫你準備專屬題目喔，請稍候...</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quiz View -->
+        <section id="view-quiz" class="view">
+            <div class="quiz-header">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+                </div>
+                <div class="quiz-stats">
+                    <span id="question-counter">題 1 / 20</span>
+                    <span id="mistake-counter" class="text-red"><i class="fas fa-times-circle"></i> 0</span>
+                </div>
+            </div>
+
+            <div class="quiz-card glass-panel">
+                <div id="quiz-content">
+                    <!-- Dynamic Quiz Content will be injected here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Results View -->
+        <section id="view-results" class="view">
+            <div class="results-card glass-panel">
+                <div class="celebration-icon"><i class="fas fa-trophy"></i></div>
+                <h2>太棒了！完成練習！</h2>
+
+                <div class="stats-row">
+                    <div class="stat-box">
+                        <span class="stat-label">總題數</span>
+                        <span class="stat-value" id="res-total">20</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-label">重測次數</span>
+                        <span class="stat-value text-red" id="res-mistakes">3</span>
+                    </div>
+                </div>
+
+                <p id="res-message" class="res-msg">你已經把不會的題目都學會了！</p>
+
+                <button id="btn-home" class="primary-btn">回首頁</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Settings Modal -->
+    <div id="modal-settings" class="modal">
+        <div class="modal-content glass-panel">
+            <div class="modal-header">
+                <h2>系統設定</h2>
+                <button class="close-btn"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="api-key">Google Gemini API Key</label>
+                    <p class="helper-text text-small">本系統使用 Gemini AI 自動出題，金鑰將只儲存在您的瀏覽器中。</p>
+                    <input type="password" id="api-key" placeholder="AIzaSy...">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="btn-save-settings" class="primary-btn">儲存</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="toast"></div>
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
