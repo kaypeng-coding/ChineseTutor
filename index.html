@@ -62,6 +62,14 @@
                         <h3>修辭練習</h3>
                         <p>練習譬喻、擬人、排比等各種修辭手法</p>
                     </button>
+
+                    <button class="mode-card" data-mode="exam">
+                        <div class="card-icon bg-red">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <h3>考古題複習</h3>
+                        <p>上傳考卷或講義，由AI精準萃取題目並加上詳解</p>
+                    </button>
                 </div>
             </div>
         </section>
@@ -69,7 +77,7 @@
         <!-- Setup Practice View -->
         <section id="view-setup" class="view">
             <div class="setup-card glass-panel">
-                <button class="back-btn"><i class="fas fa-arrow-left"></i> 返回</button>
+                <button class="back-btn"><i class="fas fa-home"></i> 回首頁重新選擇</button>
 
                 <h2 id="setup-title">準備練習</h2>
 
@@ -105,10 +113,10 @@
 
                     <div class="tab-content" id="tab-image">
                         <div class="file-upload-wrapper" id="drop-zone">
-                            <input type="file" id="scope-image" accept="image/*">
+                            <input type="file" id="scope-image" accept="image/*" multiple>
                             <div class="upload-placeholder">
                                 <i class="fas fa-cloud-upload-alt container-icon"></i>
-                                <span>點擊或拖曳圖片至此處</span>
+                                <span>點擊或拖曳圖片至此處 (可多選)</span>
                             </div>
                             <img id="image-preview" src="" alt="預覽圖片" style="display: none;">
                         </div>
@@ -128,6 +136,7 @@
 
         <!-- Quiz View -->
         <section id="view-quiz" class="view">
+            <button id="btn-quit-quiz" class="back-btn" style="margin-bottom: 1rem;"><i class="fas fa-home"></i> 回首頁 (重新選擇)</button>
             <div class="quiz-header">
                 <div class="progress-bar">
                     <div class="progress-fill" id="progress-fill" style="width: 0%"></div>

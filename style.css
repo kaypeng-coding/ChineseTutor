@@ -126,6 +126,16 @@ body {
     color: white;
 }
 
+.bg-orange {
+    background-color: var(--yellow);
+    color: white;
+}
+
+.bg-red {
+    background-color: var(--red);
+    color: white;
+}
+
 .glass-panel {
     background: var(--card-bg);
     backdrop-filter: blur(12px);
@@ -306,7 +316,8 @@ button {
 }
 
 .mode-cards {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 1.5rem;
 }
 
